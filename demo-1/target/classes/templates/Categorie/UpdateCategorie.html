@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: headerfiles">
+
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+<header th:insert="fragment.html :: nav"></header>
+
+
+<!-- Form Name -->
+
+
+<body>
+	<div class="container">
+		<h1>Admin Management </h1>
+		<hr>
+		<h2>Update Category</h2>
+
+		<form action="#" th:action="@{/admin/updatecategorie}" th:object="${category}"
+			method="POST">
+			
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+			<h6 style="margin-top:10px"> Category name</h6>
+			<input type="text" th:field="*{nameCategory}" class="form-control mb-4 col-4">
+				<h6> Category logo</h6>
+				<input type="text" th:field="*{logoscategory}" class="form-control mb-4 col-4">
+				
+				
+				
+				<button type="submit" class="btn btn-info col-2"> Update Category</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/admin/indexcateg}"> Back to Category List</a>
+	</div>
+</body>
+</html>

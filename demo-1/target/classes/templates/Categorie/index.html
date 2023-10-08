@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: headerfiles"></head>
+
+<body>
+<header th:insert="fragment.html :: nav"></header>
+ 
+ 
+ 
+
+ <table class="table table-striped table-dark" style="margin-top:50px;">
+    <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">name categorie</th>
+      <th scope="col">logos categorie</th>
+      <th scope="col">options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c:${categories} ">
+      <th th:text="${c.id}" scope="row"> </th>
+      <td th:text="${c.nameCategory}"></td>
+      <td ><i th:class="${c.logoscategory}"></td>
+      
+      
+      
+      <td>
+         <a th:href="@{/admin/formupdatecategorie(id=${c.id})}" class="btn btn-success" >UpDate</a>
+        <a onclick="return confirm('are u sure u want to delete this category ')" class="btn btn-danger" th:href="@{/admin/deletecategorie(id=${c.id})}">Delete</a>
+      </td>
+  
+    </tr>
+    </tbody>
+  </table>
+  
+  <a th:href="@{/admin/formaddcategorie}" class="btn btn-danger" >Add</a>
+ <div th:insert="Footer.html :: footer"></header>
+</body>
+</html>

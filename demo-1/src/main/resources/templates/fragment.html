@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html ang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Fragment #1 : Header files contains css and js references -->
+<head th:fragment="headerfiles">
+    <title>Introduction to SpringBoot Security</title>
+    <meta charset="UTF-8"/>
+    
+    
+   
+    
+  <link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+ crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+</head>
+<body style="background-color:grey;" >
+
+<!-- Fragment #2 : Navbar contains nav links -->
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Page</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{~/admin/home}"><i class="fa fa-home"></i>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{~/admin/indexcateg}">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{~/admin/indexfood}">Food</a>
+                </li>
+                
+            </ul>
+            <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+                <button  sec:authorize="isAnonymous()" th:href="@{~/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>

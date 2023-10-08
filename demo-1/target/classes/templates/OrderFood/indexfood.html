@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragment.html :: headerfiles">
+
+<style>
+th { border: 1px solid grey;}
+.pagination-div{user-select: none;}
+.pagination-div span{border-radius:3px;border:1px solid #999;
+   padding:5px;margin:10px 0px 0px 10px;display:inline-block}
+span.selected{background:#ccf;
+}
+th{background-color:black;}
+</style>
+</head>
+
+<body>
+<header th:insert="fragment.html :: nav"></header>
+ 
+ 
+ 
+
+ <table class="table table-striped table-dark" style="margin-top:20px;">
+    <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Description</th>
+      <th scope="col"> Food name</th>
+      <th scope="col"> Food price</th>
+      <th scope="col"> Food category</th>
+      
+      <th scope="col">options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p:${page.content} ">
+      <th th:text="${p.id}" scope="row"> </th>
+      <td th:text="${p.description}"></td>
+       <td th:text="${p.nameOrder}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${p.category.nameCategory}"></td>
+           <td  ><img  class="img-circle" th:src="@{/book-store/src/assets/img/{img} (img=${p.img})}" width="100" height="100"/> 
+           
+         </td>
+      
+      
+      
+      <td>
+        <a th:href="@{/admin/formupdatefood(id=${p.id})}" class="btn btn-success" style="margin-buttom:10px";>UpDate</a>
+        <a onclick="return confirm('are u sure u want to delete this product ')" class="btn btn-danger" th:href="@{/admin/deletefood(id=${p.id})}" style="margin-top:10px";>Delete</a>
+      </td>
+  
+    </tr>
+    
+    
+    </tbody>
+  </table>
+  
+  <a th:href="@{/admin/foodForm}" class="btn btn-danger" >Add</a>
+ 
+ 
+ <div class="pagination-div">
+    <span th:if="${page.hasPrevious()}">
+        <a th:href="@{/admin/indexfood(page=${page.number-1},size=${page.size})}">Previous</a>
+    </span>
+    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+        <span th:unless="${page.number == i}">
+             <a th:href="@{/admin/indexfood(page=${i},size=${page.size})}">[[${i}+1]]</a>
+        </span>
+    </th:block>
+    <span th:if="${page.hasNext()}">
+        <a th:href="@{/admin/indexfood(page=${page.number+1},size=${page.size})}">Next</a>
+    </span>
+</div>
+ 
+ 
+ 
+ 
+ 
+ 
+ <div th:insert="Footer.html :: footer"></header>
+</body>
+</html>
